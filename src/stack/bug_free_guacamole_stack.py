@@ -14,7 +14,7 @@ class BugFreeGuacamoleStack(Stack):
             self, 'HelloWorldFunction',
             runtime=_lambda.Runtime.PYTHON_3_11,
             handler='lambda.lambda_handler',
-            code=_lambda.Code.from_asset('lambda/lambda_handler'),
+            code=_lambda.Code.from_asset('lambda-function/lambda/lambda_handler'),
             timeout=Duration.seconds(30),
             environment={
                 'ENVIRONMENT': self.node.try_get_context('environment') or 'dev'
