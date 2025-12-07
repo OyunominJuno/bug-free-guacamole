@@ -10,10 +10,25 @@ class BugFreeGuacamoleStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        # The code that defines your stack goes here
-
-        # example resource
-        # queue = sqs.Queue(
-        #     self, "BugFreeGuacamoleQueue",
-        #     visibility_timeout=Duration.seconds(300),
-        # )
+        hello_lambda = _lambda.Function(
+            self, 'HelloWorldFunction',
+            runtime=_lambda.Runtime.PYTHON_3_11,
+            handler='handler.lambda_handler',
+            code=_lambda.Code.from_asset('lambda/hello_world'),
+            timeout=Duration.seconds(30),
+            environment={
+                'ENVIRONMENT': self.node.try_get_context('environment') or 'dev'
+            }
+        )
+        
+        api = apigw.LambdaRestApi(
+            self, 'HelloWorldApi',
+            handler=hello_lambda,
+            proxy=False
+        )
+        
+        hello_resource = api.root.add_resource('hello')
+        hello_resource.add_method('GET')
+        hello_resource.add_method('POST')
+        
+        CfnOutput(self, 'ApiUrl', value=api.url)
