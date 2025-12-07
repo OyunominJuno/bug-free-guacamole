@@ -1,7 +1,7 @@
 import aws_cdk as core
 import aws_cdk.assertions as assertions
 
-from bug_free_guacamole.bug_free_guacamole_stack import BugFreeGuacamoleStack
+from src.stack.bug_free_guacamole_stack import BugFreeGuacamoleStack
 
 # example tests. To run these tests, uncomment this file along with the example
 # resource in bug_free_guacamole/bug_free_guacamole_stack.py

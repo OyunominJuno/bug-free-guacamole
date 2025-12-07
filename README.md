@@ -62,3 +62,8 @@ Enjoy!
 error -  error: Multiple top-level packages discovered in a flat-layout: ['stack', 'lambda'].
 explanation (exp) - lambda should be deployed through CDK, so my python deployment should only include CDK in it. It is atm trying to do both. Also lambda doesn't need __init__.py because it is not a python managed module. CDK manages it
 solution 1 - add include/exclude in toml file. or use a src directory and still set it up in toml. Chose the 2nd one. 
+2.
+error - tests/unit/test_bug_free_guacamole_stack.py:4: in <module>
+    from bug_free_guacamole.bug_free_guacamole_stack import BugFreeGuacamoleStack
+E   ModuleNotFoundError: No module named 'bug_free_guacamole'
+explanation/solution - src layout had to be updated in the tests module as well
