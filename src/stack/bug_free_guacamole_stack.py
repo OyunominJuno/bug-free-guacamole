@@ -1,5 +1,5 @@
 from aws_cdk import (
-    # Duration,
+    Duration,
     Stack,
     aws_apigateway as apigw,
     aws_lambda as _lambda
